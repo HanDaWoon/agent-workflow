@@ -1,0 +1,24 @@
+{
+  "name": "agent-workflow",
+  "version": "1.0.1",
+  "description": "GitHub 이슈부터 검증·리뷰·커밋·자원 정리까지 연결하는 공통 코딩 워크플로우",
+  "author": {
+    "name": "HanDaWoon"
+  },
+  "repository": "https://github.com/HanDaWoon/agent-workflow",
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Agent Workflow",
+    "shortDescription": "이슈 기반 구현·검증·리뷰·정리",
+    "longDescription": "Codex와 Claude Code에서 같은 실행 스킬을 사용합니다. 프로젝트 지침과 현재 권한에 따라 GitHub 이슈, 검증, 독립 리뷰, 커밋 및 완료 자원 정리를 연결합니다. Matt 스킬과 Orca는 별도로 준비합니다.",
+    "developerName": "HanDaWoon",
+    "category": "Productivity",
+    "capabilities": [
+      "Read",
+      "Write"
+    ],
+    "defaultPrompt": [
+      "engineering-workflow로 이 프로젝트의 다음 구현 작업을 계획해줘."
+    ]
+  }
+}

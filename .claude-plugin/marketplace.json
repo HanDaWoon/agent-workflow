@@ -1,0 +1,16 @@
+{
+  "name": "agent-workflow",
+  "owner": {
+    "name": "HanDaWoon"
+  },
+  "plugins": [
+    {
+      "name": "agent-workflow",
+      "source": "./plugins/agent-workflow",
+      "description": "GitHub 이슈부터 검증·리뷰·커밋·자원 정리까지 연결하는 공통 코딩 워크플로우"
+    }
+  ],
+  "metadata": {
+    "description": "GitHub 이슈 기반 코딩 워크플로우"
+  }
+}

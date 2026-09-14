@@ -1,0 +1,11 @@
+.DS_Store
+.scratch/
+.env
+.env.*
+!.env.example
+
+# External skills are installed and maintained outside this repository's workflow source.
+/.agents/skills/
+
+# Private development context, archives, and session records.
+/.local/

@@ -1,0 +1,9 @@
+{
+  "name": "agent-workflow",
+  "version": "1.0.1",
+  "description": "GitHub 이슈부터 검증·리뷰·커밋·자원 정리까지 연결하는 공통 코딩 워크플로우",
+  "author": {
+    "name": "HanDaWoon"
+  },
+  "repository": "https://github.com/HanDaWoon/agent-workflow"
+}
