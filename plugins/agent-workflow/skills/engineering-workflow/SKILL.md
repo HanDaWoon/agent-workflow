@@ -24,6 +24,7 @@ Carry forward the objective, acceptance criteria, and settled decisions from the
 | Clear implementation | Confirm the issue, acceptance criteria, and project verification requirements, then execute |
 | Uncertain implementation or task decomposition | Read [Planning](references/planning.md) and define the next executable work |
 | Execution, resumption, delegation, or handoff | Read [Execution](references/execution.md) to establish role, model, and change ownership |
+| Review, audit, or feature research that should end in issues | Use the `issue-discovery` skill when the plugin provides it; otherwise tell the user it ships with the plugin |
 | Project-manager role: delegate tasks or issues to workers in Orca worktrees and track only their progress | Read [Project manager](references/project-manager.md) and coordinate without editing project files |
 | Finishing changes, review, integration, or resource cleanup | Read [Completion](references/completion.md), complete eligible cleanup, and report evidence and actual status |
 

@@ -19,7 +19,7 @@ Availability is not invocation, project setup, or evidence of a successful codin
 
 ## User-invoked planning tools
 
-`setup-matt-pocock-skills`, `to-spec`, `to-tickets`, `implement`, and `wayfinder` are user-invoked in the inspected upstream revision. Recommend an appropriate tool when useful, but do not invoke it transitively from this workflow. Preserve upstream invocation metadata, including `agents/openai.yaml` when present.
+`setup-matt-pocock-skills`, `to-spec`, `to-tickets`, `triage`, `improve-codebase-architecture`, `implement`, and `wayfinder` are user-invoked in the inspected upstream revision. Recommend an appropriate tool when useful, but do not invoke it transitively from this workflow. Preserve upstream invocation metadata, including `agents/openai.yaml` when present.
 
 Before using upstream planning tools, resolve their project contract: `docs/agents/issue-tracker.md`, domain documentation, and the label vocabulary they require. A link to an arbitrary workflow document alone is insufficient. Reuse existing decisions about GitHub, language, and project scope. Setup must not create an unnecessary triage system.
 

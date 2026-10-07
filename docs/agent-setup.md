@@ -40,6 +40,7 @@ claude plugin install agent-workflow@agent-workflow --scope user
 
 - Codex: `$agent-workflow:engineering-workflow`를 선택하고 작업 요청을 입력한다.
 - Claude Code: `/agent-workflow:engineering-workflow` 뒤에 작업 요청을 입력한다.
+- 리뷰·조사를 이슈로 만들 때는 Codex의 `$agent-workflow:issue-discovery`, Claude Code의 `/agent-workflow:issue-discovery`를 사용한다.
 
 예: `engineering-workflow로 이 프로젝트의 다음 구현 작업을 계획해줘.` 설치 목록은 `codex plugin list --json` 또는 `claude plugin list --json`으로 확인한다. 실제 사용 시 스킬 본문과 필요한 reference를 읽었는지도 확인한다. 단순 질문에는 전체 구현 절차가 필요하지 않다.
 

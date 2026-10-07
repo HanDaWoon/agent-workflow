@@ -12,13 +12,15 @@ Assigning the role authorizes delegating the named tasks to workers, including t
 
 ## Intake
 
+A parent issue expands into its sub-issues, taken in the parent's order. Backlog items and decision issues whose choice the user owns go to the user; a decision issue that investigation can settle goes to a worker as decision work. An issue blocked by an open decision waits until the decision closes.
+
 Complete these steps for each task or issue before starting its worker:
 
-1. **Scope:** read the issue or request and the project's workflow configuration, then confirm one behavior with observable acceptance criteria. A typed task without an issue follows step 1 of the [common implementation flow](../SKILL.md#common-implementation-flow). Ask the user only for decisions a worker cannot discover, and carry every answer the user already gave into the spec.
-2. **Agent:** choose among the agent hosts the project configures, since a worker reaches this workflow only through its own host's project instructions. A user-named agent wins; otherwise pick by the task and record why. Start from the [launch defaults](execution.md#select-the-model), adjust model and effort to the task under that rule, and fill the model record from the launch's effective values.
-3. **Base:** verify the starting ref per [Execution](execution.md#worktrees-and-concurrency) so the new worktree contains every change the task depends on.
-4. **Spec:** write a self-contained Task spec in the orchestration contract's shape. Include the issue link, the verified base, the acceptance criteria, and the project's required checks. State that the manager owns independent review: the worker self-reviews, commits, and returns its commit SHA, the checks it ran with results, and independent review as pending when [Completion](completion.md#review-criteria-and-depth) requires one.
-5. **Start:** start the worker in a new top-level worktree with repo setup, one worktree per issue. Tasks beyond the [concurrency limit](execution.md#worktrees-and-concurrency) wait in the progress report and get their worktree when a slot frees.
+1. **Scope:** read the issue with its comments, or the request, and the project's workflow configuration, then confirm one behavior with observable acceptance criteria. Carry criteria added in comments into the spec. A typed task without an issue follows step 1 of the [common implementation flow](../SKILL.md#common-implementation-flow). Ask the user only for decisions a worker cannot discover, and carry every answer the user already gave into the spec.
+2. **Agent:** choose among the agent hosts the project configures, since a worker reaches this workflow only through its own host's project instructions. Start from the [launch defaults](execution.md#select-the-model) and adjust model and effort to the task under that rule. A user-named agent or value wins. Otherwise an issue's execution recommendation is the proposed adjustment; its body section prevails over its `agent:`, `effort:`, `model:`, and `risk:` labels, and a departure from it is recorded with the reason. Without a recommendation, pick by the task and record why. Fill the model record from the launch's effective values.
+3. **Base:** verify the starting ref per [Execution](execution.md#worktrees-and-concurrency) so the new worktree contains every change the task depends on. For an issue with blockers, the base contains their integrated results, and the spec names the dependency contract each one provides.
+4. **Spec:** write a self-contained Task spec in the orchestration contract's shape. Include the issue link, the issue body with any criteria from comments, the verified base, and the project's required checks. State that the manager owns independent review: the worker self-reviews, commits, and returns its commit SHA, the checks it ran with results, and independent review as pending when [Completion](completion.md#review-criteria-and-depth) requires one.
+5. **Start:** start the worker in a new top-level worktree with repo setup, one worktree per issue, and link the worktree card to its issue. Order issues by their native blocker and parent relations, and run ready issues in parallel only when their declared conflict areas do not overlap. Issues that both declare a schema change run one after another, each on the integrated base. Tasks beyond the [concurrency limit](execution.md#worktrees-and-concurrency) wait in the progress report and get their worktree when a slot frees.
 
 ## Tracking
 
@@ -38,7 +40,7 @@ Each report has one row per task: issue, worktree ID, agent with terminal handle
 
 ## Review and completion
 
-Dispatch the independent review that [Completion](completion.md#review-criteria-and-depth) requires over the implementation's frozen commit, with separate Spec and Standards reviewers for high-risk changes. Send findings back as a follow-up Task in the implementation's worktree; the manager synthesizes findings and leaves fixes to the worker.
+Dispatch the independent review that [Completion](completion.md#review-criteria-and-depth) requires over the implementation's frozen commit, with separate Spec and Standards reviewers for high-risk changes; an issue's declared risk is the starting assessment. Send findings back as a follow-up Task in the implementation's worktree; the manager synthesizes findings and leaves fixes to the worker.
 
 A `worker_done` settles the Dispatch, not the issue. Check the reported commit and checks against the acceptance criteria before moving the card. Integration, push, merge, and issue closure proceed within project authorization by the owner the project configuration names; otherwise report the commit as ready and name the decision the user owes. Settle each worker terminal under the orchestration contract, mark the card `completed` once integrated, then apply [Resource cleanup](completion.md#resource-cleanup).
 

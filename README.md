@@ -31,6 +31,8 @@ claude plugin install agent-workflow@agent-workflow --scope user
 
 **프로젝트 관리자 역할:** `engineering-workflow로 프로젝트 관리자 역할을 맡아줘. 이슈 #12와 #13을 진행해줘.`처럼 요청합니다. 세션은 코드를 직접 고치지 않습니다. 작업이나 이슈마다 Orca 워크트리를 만들어 Codex 또는 Claude 작업자에게 맡기고, 카드 상태와 진행 보고만 관리합니다. Orca 감독 실행을 쓸 수 있는 환경이 필요합니다.
 
+**리뷰·조사를 이슈로:** `/agent-workflow:issue-discovery 이 프로젝트 코드 리뷰해서 이슈로 만들어줘.`처럼 요청합니다. Codex에서는 `$agent-workflow:issue-discovery`를 씁니다. 코드 리뷰, 기능·UX 리뷰, 신규 기능 조사, 아이디어 구체화를 진행하고 발견 사항을 검증한 뒤 이슈 초안을 표로 보여 줍니다. 승인한 이슈와 라벨만 발행합니다. 이슈에는 근거, 의존 관계, 충돌 영역, 위험도, 권장 에이전트·모델·effort가 들어가므로 프로젝트 관리자가 그대로 배정할 수 있습니다.
+
 작업 내용에 따른 자동 선택은 호스트와 프로젝트 지침에 따릅니다. 확실하게 적용하려면 스킬을 명시적으로 호출합니다. 단순 질문에는 전체 구현 절차를 적용하지 않습니다.
 
 ## 동작 방식
@@ -47,6 +49,7 @@ claude plugin install agent-workflow@agent-workflow --scope user
 - [워크플로우 구조와 기본값](docs/workflow.md)
 - [실행 스킬](plugins/agent-workflow/skills/engineering-workflow/SKILL.md)
 - [전역 진입 템플릿](templates/global-entry.md) · [프로젝트 설정 템플릿](templates/project-workflow.md)
-- [이슈 템플릿](plugins/agent-workflow/skills/engineering-workflow/assets/issue.md) · [완료 보고 템플릿](plugins/agent-workflow/skills/engineering-workflow/assets/completion-report.md)
+- [이슈 발굴 스킬](plugins/agent-workflow/skills/issue-discovery/SKILL.md)
+- [이슈 템플릿](plugins/agent-workflow/skills/engineering-workflow/assets/issue.md) · [상위 이슈 템플릿](plugins/agent-workflow/skills/engineering-workflow/assets/parent-issue.md) · [완료 보고 템플릿](plugins/agent-workflow/skills/engineering-workflow/assets/completion-report.md)
 
 에이전트용 지침은 영어, 사용자 안내와 이슈·완료 보고 템플릿은 한국어로 제공합니다.

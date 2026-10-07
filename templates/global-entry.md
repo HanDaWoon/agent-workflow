@@ -4,7 +4,7 @@ This template provides the entry conditions for the v1 workflow. Global installa
 
 ---
 
-For project work, first read the repository instructions and `docs/agents/workflow.md`, or equivalent existing configuration. Use the personal `engineering-workflow` skill for implementation, resumption, work-planning, and project-manager requests. For questions and reading requests, read the necessary material and answer directly.
+For project work, first read the repository instructions and `docs/agents/workflow.md`, or equivalent existing configuration. Use the personal `engineering-workflow` skill for implementation, resumption, work-planning, and project-manager requests, and `issue-discovery` for reviews and research that should become issues. For questions and reading requests, read the necessary material and answer directly.
 
 - Connect implementation to a GitHub issue. Use a separate Orca worktree per implementation issue during supervised execution.
 - Select model and effort according to uncertainty and change impact; verify and state support and actual applied values in the execution environment.
