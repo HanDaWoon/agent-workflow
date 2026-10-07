@@ -103,7 +103,7 @@ python3 scripts/connect.py --project /path/to/project --agent both --apply
 
 연결 대상 디렉터리는 실제 스킬 원본을 가리키는 심볼릭 링크다. 진입 지침에는 원본의 실제 절대 경로를 기록해 검색 도구가 링크를 생략해도 직접 읽도록 한다. 원본 수정은 다음 읽기부터 반영되므로 원본 저장소를 이동·삭제하면 연결이 끊어진다. 다른 호스트에 프로젝트만 복제해도 해당 원본 경로가 자동 준비되지는 않는다. 심볼릭 링크 생성이 허용되지 않는 호스트는 오류를 보고한다. Windows에서 개발용 연결을 사용하려면 심볼릭 링크 생성 권한이 필요하다.
 
-기존 지침은 보존하고 `agent-workflow:begin`과 `agent-workflow:end` 사이에 연결 지침을 추가한다. 같은 연결을 반복해도 중복으로 추가하지 않는다. 다른 내용의 기존 스킬 경로, 수정된 관리 블록, 기존 workflow 지침, 외부로 향하는 심볼릭 링크 경유 경로가 있으면 자동 병합하지 않는다. 원래 파일을 검토하고 [프로젝트 템플릿](../templates/project-workflow.md)의 진입 조건을 기존 지침에 연결한다. 선택은 추가할 호스트 범위이며, `both` 사용 후 `codex`를 선택해도 Claude 연결을 삭제하지 않는다.
+기존 지침은 보존하고 `agent-workflow:begin`과 `agent-workflow:end` 사이에 연결 지침을 추가한다. 같은 연결을 반복해도 중복으로 추가하지 않는다. 이전 버전이 만든 관리 블록은 연결된 것으로 보고 그대로 둔다. 프로젝트 관리자 요청까지 자동 진입하게 하려면 그 블록의 진입 문구를 직접 갱신한다. 다른 내용의 기존 스킬 경로, 수정된 관리 블록, 기존 workflow 지침, 외부로 향하는 심볼릭 링크 경유 경로가 있으면 자동 병합하지 않는다. 원래 파일을 검토하고 [프로젝트 템플릿](../templates/project-workflow.md)의 진입 조건을 기존 지침에 연결한다. 선택은 추가할 호스트 범위이며, `both` 사용 후 `codex`를 선택해도 Claude 연결을 삭제하지 않는다.
 
 하드링크로 공유된 지침도 자동 변경하지 않는다. Codex 연결 시 루트 `AGENTS.override.md`가 있으면 새 AGENTS가 무시될 수 있어 자동 연결을 중단한다. 기존 우선 지침에 진입 조건을 직접 병합하고 새 세션에서 실제 적용을 확인한다.
 
@@ -117,6 +117,6 @@ python3 scripts/connect.py --project /path/to/project --agent both --apply
 
 ## 개발용 연결의 호환성 확인
 
-위 Python 도구로 연결한 뒤 새 세션에서 일반 구현·재개·계획 요청을 보내 실제 원본 읽기를 확인한다. 단순 질문은 필요한 근거로 바로 답해야 한다. 명시적으로 호출할 때는 Codex의 `$engineering-workflow`, Claude Code의 `/engineering-workflow`를 사용할 수 있으나, 연결된 스킬의 자동 선택과 프로젝트 지침의 진입은 별도로 확인한다. 기본 읽기 위치와 스킬 형식은 [Codex 스킬 문서](https://learn.chatgpt.com/docs/build-skills), [Claude Code 스킬 문서](https://code.claude.com/docs/en/skills), [Claude의 AGENTS import 문서](https://code.claude.com/docs/en/memory#agentsmd)를 근거로 삼았다.
+위 Python 도구로 연결한 뒤 새 세션에서 일반 구현·재개·계획·프로젝트 관리자 요청을 보내 실제 원본 읽기를 확인한다. 단순 질문은 필요한 근거로 바로 답해야 한다. 명시적으로 호출할 때는 Codex의 `$engineering-workflow`, Claude Code의 `/engineering-workflow`를 사용할 수 있으나, 연결된 스킬의 자동 선택과 프로젝트 지침의 진입은 별도로 확인한다. 기본 읽기 위치와 스킬 형식은 [Codex 스킬 문서](https://learn.chatgpt.com/docs/build-skills), [Claude Code 스킬 문서](https://code.claude.com/docs/en/skills), [Claude의 AGENTS import 문서](https://code.claude.com/docs/en/memory#agentsmd)를 근거로 삼았다.
 
 모델·effort는 선택한 호스트의 지원값과 실제 적용값으로 기록한다. 같은 `medium` 이름이 같은 추론량이라는 뜻은 아니다. 한 호스트에 설치한 Matt·Orca 스킬이 다른 호스트에서도 보인다고 가정하지 않으며, 필요한 기능이 없으면 설치를 시작하지 않고 제한을 보고한다. Orca 감독·리뷰·정리도 그 호스트에서 제공되는 계약을 사용한다.

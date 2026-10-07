@@ -11,7 +11,7 @@ Configuration template for the adopted v1 workflow. Link existing project docume
 - Domain and ADRs: `<existing documentation links>`
 - Upstream skill compatibility, when those skills are used: `<docs/agents/issue-tracker.md, docs/agents/domain.md, and required label vocabulary; link existing sources and provide the exact entry files expected by the selected skills>`
 - Execution skill entry: `<discoverable personal skill or verified source SKILL.md link; record whether entry is explicit-only or enabled for the authorized scope>`
-- Project instruction pointer, when entry is enabled: `For implementation, resumption, and work-planning requests, read <execution skill entry> and docs/agents/workflow.md. For questions and reading requests, answer directly.`
+- Project instruction pointer, when entry is enabled: `For implementation, resumption, work-planning, and project-manager requests, read <execution skill entry> and docs/agents/workflow.md. For questions and reading requests, answer directly.`
 - Language: agent instructions and handoffs in English; user-facing review documents, issues, and completion reports in Korean.
 
 ## Execution baseline

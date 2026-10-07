@@ -66,6 +66,23 @@ class ConnectTests(unittest.TestCase):
                 finally:
                     self.project = original
 
+    def test_new_connection_routes_project_manager_requests(self):
+        self.assertEqual(self.run_connect("codex").returncode, 0)
+        self.assertIn("work-planning, and project-manager requests",
+                      (self.project / "AGENTS.md").read_text())
+
+    def test_earlier_release_block_is_accepted_unchanged(self):
+        self.assertEqual(self.run_connect("codex").returncode, 0)
+        path = self.project / "AGENTS.md"
+        earlier = path.read_bytes().replace(
+            b"For implementation, resumption, work-planning, and project-manager requests",
+            b"For implementation, resumption, and work-planning requests")
+        path.write_bytes(earlier)
+        result = self.run_connect("codex")
+        self.assertEqual(result.returncode, 0, result.stderr)
+        self.assertEqual(path.read_bytes(), earlier)
+        self.assertIn("이전 버전 연결 블록", result.stdout)
+
     def test_claude_preserves_and_imports_existing_project_rules(self):
         original = b"# User standards\r\nPreserve me.\r\n"
         (self.project / "AGENTS.md").write_bytes(original)

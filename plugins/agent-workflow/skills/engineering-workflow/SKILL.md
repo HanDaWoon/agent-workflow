@@ -1,6 +1,6 @@
 ---
 name: engineering-workflow
-description: Plan or execute implementation around GitHub issues and connect verification, review, commits, and integration evidence. Use for implementation requests, task decomposition, and resuming changes. Do not apply the full workflow to simple questions or reading tasks.
+description: Plan or execute implementation around GitHub issues and connect verification, review, commits, and integration evidence. Use for implementation requests, task decomposition, resuming changes, and the project-manager role that delegates tasks to Orca workers and tracks their progress. Do not apply the full workflow to simple questions or reading tasks.
 ---
 
 # Engineering Workflow
@@ -24,6 +24,7 @@ Carry forward the objective, acceptance criteria, and settled decisions from the
 | Clear implementation | Confirm the issue, acceptance criteria, and project verification requirements, then execute |
 | Uncertain implementation or task decomposition | Read [Planning](references/planning.md) and define the next executable work |
 | Execution, resumption, delegation, or handoff | Read [Execution](references/execution.md) to establish role, model, and change ownership |
+| Project-manager role: delegate tasks or issues to workers in Orca worktrees and track only their progress | Read [Project manager](references/project-manager.md) and coordinate without editing project files |
 | Finishing changes, review, integration, or resource cleanup | Read [Completion](references/completion.md), complete eligible cleanup, and report evidence and actual status |
 
 For interface design, domain decisions, or agent-document edits, read [Skill composition](references/skill-composition.md) and apply the relevant installed specialist. This workflow owns routing and evidence; it does not duplicate those specialists' full procedures.

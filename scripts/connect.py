@@ -12,6 +12,9 @@ from urllib.parse import quote
 SOURCE = Path(__file__).resolve().parents[1] / "skills/engineering-workflow"
 BEGIN = "<!-- agent-workflow:begin -->"
 END = "<!-- agent-workflow:end -->"
+ENTRY = "For implementation, resumption, work-planning, and project-manager requests"
+# Blocks written by earlier releases remain valid connections and are left unchanged.
+EARLIER_ENTRIES = ("For implementation, resumption, and work-planning requests",)
 TARGETS = {
     "codex": (".agents/skills/engineering-workflow", "AGENTS.md"),
     "claude": (".claude/skills/engineering-workflow", "CLAUDE.md"),
@@ -28,11 +31,10 @@ def check_path(project, path):
             raise ValueError(f"디렉터리가 아닌 경로입니다: {candidate}")
 
 
-def instruction_block(import_agents):
+def instruction_block(import_agents, entry=ENTRY):
     skill_path = quote(str(SOURCE / "SKILL.md"), safe="/")
     body = ("@AGENTS.md\n\n" if import_agents else "") + (
-        "For implementation, resumption, and work-planning requests, read "
-        f"[Engineering Workflow]({skill_path}) directly and follow its applicable route. "
+        f"{entry}, read [Engineering Workflow]({skill_path}) directly and follow its applicable route. "
         "Open that exact file before using directory search to conclude it is unavailable. "
         "Read the project's existing instructions and verification requirements. "
         "For questions and reading requests, answer directly from the necessary evidence."
@@ -40,7 +42,7 @@ def instruction_block(import_agents):
     return f"{BEGIN}\n{body}\n{END}\n"
 
 
-def plan(project, agents):
+def plan(project, agents, notices=None):
     if not (project / ".git").exists():
         raise ValueError("--project에는 기존 Git 프로젝트의 루트 경로를 지정하세요.")
     if not (SOURCE / "SKILL.md").is_file():
@@ -68,11 +70,14 @@ def plan(project, agents):
         shared = project / "AGENTS.md"
         if agent == "claude" and shared.is_symlink():
             raise ValueError(f"공유 지침의 심볼릭 링크를 직접 검토하세요: {shared}")
-        block = instruction_block(agent == "claude" and
-                                  (shared.is_file() or "codex" in agents))
+        import_agents = agent == "claude" and (shared.is_file() or "codex" in agents)
+        block = instruction_block(import_agents)
         if BEGIN in text or END in text:
-            if text.count(BEGIN) != 1 or text.count(END) != 1 or block not in text:
+            known = [instruction_block(import_agents, entry) for entry in (ENTRY, *EARLIER_ENTRIES)]
+            if text.count(BEGIN) != 1 or text.count(END) != 1 or not any(k in text for k in known):
                 raise ValueError(f"기존 연결 블록이 다릅니다. 지침을 보존하고 직접 병합하세요: {instruction}")
+            if block not in text and notices is not None:
+                notices.append(f"이전 버전 연결 블록을 유지합니다. 프로젝트 관리자 요청까지 자동 진입하려면 진입 문구를 직접 갱신하세요: {instruction}")
             continue
         if "engineering-workflow" in text:
             raise ValueError(f"이미 workflow 지침이 있습니다. 중복을 피하도록 직접 병합하세요: {instruction}")
@@ -116,7 +121,10 @@ def main():
     try:
         project = args.project.expanduser().resolve(strict=True)
         agents = list(TARGETS) if args.agent == "both" else [args.agent]
-        actions = plan(project, agents)
+        notices = []
+        actions = plan(project, agents, notices)
+        for notice in notices:
+            print(notice)
         for kind, path, before, after in actions:
             if kind == "link":
                 print(f"연결 예정: {path} -> {after}")
