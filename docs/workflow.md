@@ -32,7 +32,7 @@ Agent Workflow는 공통 실행 절차를 제공하고, 프로젝트별 도구·
 - **종료:** 목표 branch에 통합하고 필수 검증·리뷰 증거를 확보한 뒤 이슈를 종료합니다. 배포가 수용 기준이면 배포 증거도 필요합니다.
 - **외부 도구:** 설치된 전문 스킬과 Orca의 현재 호출 계약을 사용합니다. 설치·업데이트·원본 복제를 맡지 않습니다.
 - **프로젝트 설정:** Markdown과 기존 설정 링크로 필요한 값을 연결합니다.
-- **모델:** 난이도·불확실성·영향 범위로 선택하고 지원값과 실제 적용값을 확인합니다. 호스트 간 같은 effort 이름을 동등한 추론량으로 간주하지 않습니다.
+- **모델:** 난이도·불확실성·영향 범위로 선택하고 지원값과 실제 적용값을 확인합니다. 에이전트 기본값은 Codex `gpt-6.1-sol`·`high`, Claude `claude-opus-5-5`·`high`입니다. 에이전트를 띄우는 세션이 작업의 깊이와 크기를 보고 effort를 낮추거나 높입니다. 가장 깊은 작업에는 Codex `gpt-6-astra`, Claude `claude-fable-5-1`을 선택할 수 있습니다. 기본값과 다르게 고르면 이유를 기록합니다. 사용자 지시나 [프로젝트 설정](../templates/project-workflow.md)의 모델 항목이 다른 값을 지정하면 그 값을 따릅니다. 리뷰어와 인계 에이전트에도 같은 기본값을 적용합니다. 호스트 간 같은 effort 이름을 동등한 추론량으로 간주하지 않습니다.
 
 세부 절차는 [실행](../plugins/agent-workflow/skills/engineering-workflow/references/execution.md)과 [완료](../plugins/agent-workflow/skills/engineering-workflow/references/completion.md)가 소유합니다. 완료 자원 정리는 완료 절차의 일부이며 현재 사용 중인 자원과 고유 증거는 보존합니다.
 

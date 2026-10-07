@@ -12,7 +12,18 @@ Establish the agent host first: Codex or Claude Code, as selected by the user or
 
 Judge the required reasoning depth by uncertainty, change impact, and recovery cost. Favor short implementation and verification cycles for clear local changes, strengthen boundary review for changes spanning modules, and allocate deeper reasoning and independent review to security, concurrency, and complex design work.
 
-Do not assume a permanent performance ranking of models. Read the execution environment's catalog and launcher configuration to select an actually supported model ID and effort. Resolve or disclose differences between requested and applied values. If the current session cannot change its model, report the verifiable settings and limitations without claiming to have switched it.
+Every agent this workflow starts, including workers, reviewers, and handoff agents, begins from these launch defaults unless the user's instructions or the project's workflow configuration name another model or effort. A launcher's own configuration does not replace them. The defaults and adjustments made under the rule below are the user's named launch preference wherever Orca asks for one:
+
+| Host | Default model | Default effort | Deep-work model |
+| --- | --- | --- | --- |
+| Codex | `gpt-6.1-sol` | `high` | `gpt-6-astra` |
+| Claude Code | `claude-opus-5-5` | `high` | `claude-fable-5-1` |
+
+Use a named model or effort as given. The launching session adjusts the remaining values from the defaults by the depth judgment above. It lowers effort for small, clear tasks and raises it for deep, large, or long-running ones. For the deepest work it may switch to the host's deep-work model as well as, or instead of, raising effort. Record the rationale for every departure from the defaults.
+
+Pass model and effort explicitly, because a launcher's own default effort can differ from the chosen one. The installed `orca-cli` contract names the handoff launch path that accepts them. When the model changes without a named effort, start from the default effort if that model supports it. An unsupported value follows the catalog check and unsupported-value rule below.
+
+The table records the user's current preference, not a permanent performance ranking of models. Read the execution environment's catalog and launcher configuration to select an actually supported model ID and effort. Resolve or disclose differences between requested and applied values. If the current session cannot change its model, report the verifiable settings and limitations without claiming to have switched it.
 
 Record: `agent host / role / selection rationale / requested model and effort / applied model and effort / evidence`. Use the selected host's supported controls; Codex reasoning effort and Claude effort are not an equivalence scale. Record an unavailable control as not applicable and an unverifiable applied value as unconfirmed. If a requested value is unsupported, compare supported alternatives against existing user constraints; hold that execution only when no alternative meets a material constraint. Render this record in Korean when reporting to the user.
 

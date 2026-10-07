@@ -44,7 +44,7 @@ Configuration template for the adopted v1 workflow. Link existing project docume
 - External publication/push/merge/deployment scope: `<already authorized scope or unresolved>`
 - Other-project changes: `<authorization evidence or out of scope>`
 - Completion evidence location: `<issue/PR/verification-log linking convention>`
-- Project model constraints: `<actual restrictions, such as allowed models or cost; omit if none>`
+- Project model constraints and defaults: `<actual restrictions such as allowed models or cost, or agent model/effort defaults replacing the workflow's; omit if none>`
 
 This file does not grant authority. Configure it from actual user authorization and tool permissions. Reference command sources rather than copying them; keep secret values and execution logs out of this configuration.
 
